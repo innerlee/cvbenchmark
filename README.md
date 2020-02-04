@@ -16,6 +16,35 @@ python -m timeit "import cvbenchmark as cb; cb.jpg2np_turbojpeg_run()"
 # 500 loops, best of 5: 631 usec per loop
 ```
 
+- Image array normalization
+
+```bash
+# (img - mean) / std
+python -m timeit "import cvbenchmark as cb; cb.img_array_normalize_np_run()"
+# 100 loops, best of 5: 2.17 msec per loop
+
+# cv2.divide(cv2.subtract(img, mean), std)
+python -m timeit "import cvbenchmark as cb; cb.img_array_normalize_cv2_div_run()"
+# 200 loops, best of 5: 1.21 msec per loop
+
+# cv2.multiply(cv2.subtract(img, mean), stdinv)
+python -m timeit "import cvbenchmark as cb; cb.img_array_normalize_cv2_mult_run()"
+# 200 loops, best of 5: 1.08 msec per loop
+```
+
+- Convert numpy array from `unit8` to `float32`
+
+```bash
+# np.float32(img)
+python -m timeit "import cvbenchmark as cb; cb.np_unit8_to_float32_constructor_run()"
+# 5000 loops, best of 5: 67.1 usec per loop
+
+# img.astype(np.float32)
+python -m timeit "import cvbenchmark as cb; cb.np_unit8_to_float32_astype_run()"
+# 5000 loops, best of 5: 68.5 usec per loop
+```
+
+
 ## Development Guide
 
 ```bash
