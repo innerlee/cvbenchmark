@@ -2,7 +2,7 @@ import cv2
 import numpy as np
 from cvbenchmark import jpg_file
 
-imgs = [np.float32(cv2.imread(jpg_file)).transpose(2, 0, 1).copy() for i in range(64)]
+imgs = [np.float32(cv2.imread(jpg_file)).transpose(2, 0, 1) for i in range(64)]
 
 
 def check(arr):
