@@ -16,8 +16,6 @@ python -m timeit "import cvbenchmark as cb; cb.jpg2np_turbojpeg_run()"
 # 500 loops, best of 5: 631 usec per loop
 ```
 
-## Usage
-
 ## Development Guide
 
 ```bash
