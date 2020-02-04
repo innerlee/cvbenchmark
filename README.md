@@ -4,6 +4,8 @@ Who is fast, and who is the fastest.
 
 ## Results
 
+- Read a `.jpeg` image as an numpy array.
+
 ```bash
 # opencv
 python -m timeit "import cvbenchmark as cb; cb.jpg2np_opencv_run()"
