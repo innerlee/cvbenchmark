@@ -5,8 +5,13 @@ Who is fast, and who is the fastest.
 ## Results
 
 ```bash
+# opencv
 python -m timeit "import cvbenchmark as cb; cb.jpg2np_opencv_run()"
-200 loops, best of 5: 1.52 msec per loop
+200 loops, best of 5: 1.48 msec per loop
+
+# PyTurboJPEG (libjpeg-turbo), https://pypi.org/project/PyTurboJPEG/
+python -m timeit "import cvbenchmark as cb; cb.jpg2np_turbojpeg_run()"
+500 loops, best of 5: 631 usec per loop
 ```
 
 ## Usage
