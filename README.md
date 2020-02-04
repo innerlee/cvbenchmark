@@ -44,6 +44,18 @@ python -m timeit "import cvbenchmark as cb; cb.np_unit8_to_float32_astype_run()"
 # 5000 loops, best of 5: 68.5 usec per loop
 ```
 
+- Stack a list of np array (non-contiguous) along axis 0.
+
+```bash
+# np.array(imgs)
+python -m timeit -n 50 "import cvbenchmark as cb; cb.img_list_stack_constructor_run()"
+# 50 loops, best of 5: 40 msec per loop
+
+# np.stack(imgs, axis=0)
+python -m timeit -n 50 "import cvbenchmark as cb; cb.img_list_stack_stack_run()"
+# 50 loops, best of 5: 34.3 msec per loop
+```
+
 
 ## Development Guide
 
