@@ -31,9 +31,8 @@ else:
 WIDTH = max(map(lambda x: len(x), benches))
 for b in benches:
     # check
-    t = subprocess.run(
-        ['python', '-c', f'from benchmarks import run_{GROUP}', f'run_{GROUP}.check(run_{GROUP}.run_{b}())'],
-        check=True)
+    subprocess.run(['python', '-c', f'from benchmarks import run_{GROUP}', f'run_{GROUP}.check(run_{GROUP}.run_{b}())'],
+                   check=True)
     # bench
     t = subprocess.run(
         ['python', '-m', 'timeit', *N, '-s', f'from benchmarks import run_{GROUP}', f'run_{GROUP}.run_{b}()'],
