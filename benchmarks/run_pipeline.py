@@ -2,6 +2,9 @@ import cv2
 import numpy as np
 from benchmarks.consts import jpg_file
 from PIL import Image
+from turbojpeg import TurboJPEG
+
+jpeg = TurboJPEG()
 
 mean = np.float32(np.array([123.675, 116.28, 103.53]))
 std = np.float32(np.array([58.395, 57.12, 57.375]))
@@ -17,7 +20,8 @@ def check(img):
 
 
 def _load_big():
-    img = cv2.imread(jpg_file)
+    with open(jpg_file, 'rb') as in_file:
+        img = jpeg.decode(in_file.read())
     return img
 
 
@@ -49,9 +53,34 @@ def _normalize(img):
     return arr
 
 
+def _normalize_slow(img):
+    img = np.float32(img)
+    arr = (img - mean) / std
+    return arr
+
+
 def run_opencv():
     # 1. load
     img = cv2.imread(jpg_file)
+    # 2. resize
+    newsize = _scale_size(img.shape, scale)
+    img = cv2.resize(img, newsize, interpolation=cv2.INTER_LINEAR)
+    # 3. crop
+    x1, y1, x2, y2 = _crop_box(img.shape)
+    img = img[y1:y2, x1:x2, ...]
+    # 4. flip
+    img = np.flip(img, axis=1)
+    # 5. normalize
+    img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+    img = _normalize_slow(img)
+    # 6. transpose
+    img = img.transpose(2, 0, 1)
+    return img
+
+
+def run_opencv_fast():
+    # 1. load
+    img = _load_big()
     # 2. resize
     newsize = _scale_size(img.shape, scale)
     img = cv2.resize(img, newsize, interpolation=cv2.INTER_LINEAR)
