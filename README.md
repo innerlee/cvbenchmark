@@ -70,3 +70,12 @@ Who is fast, and who is the fastest.
 # bbox_clip fast  100000 loops, best of 5: 3.49 usec per loop
 # bbox_clip slow  50000 loops, best of 5: 5.71 usec per loop
 ```
+
+- Pipeline: load -> resize -> crop -> flip -> normalize -> transpose
+
+```bash
+./mmbench pipeline
+# pipeline opencv    50 loops, best of 5: 3.77 msec per loop
+# pipeline pil       100 loops, best of 5: 2.48 msec per loop
+# pipeline pil_fast  200 loops, best of 5: 1.81 msec per loop
+```
