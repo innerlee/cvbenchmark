@@ -1,6 +1,7 @@
 import cv2
 import numpy as np
 from benchmarks.consts import jpg_file
+from PIL import Image
 
 mean = np.float32(np.array([123.675, 116.28, 103.53]))
 std = np.float32(np.array([58.395, 57.12, 57.375]))
@@ -9,8 +10,11 @@ scale_small = 1 / scale
 target_size = (224, 224)
 
 
-def check(arr):
-    pass
+def check(img):
+    assert img.shape == (3, 224, 224)
+    assert img.dtype == np.float32
+    assert np.allclose(img[:, 100, 100], np.array([0.00556549, 0.18767509, 0.4090632]))
+    assert np.abs(img - run_opencv()).max() < 0.02
 
 
 def _load_big():
@@ -33,13 +37,14 @@ def _crop_box(size):
 
 
 def _normalize(img):
+    img = np.float32(img)
     imgmean = np.float64(mean.reshape(1, -1))
     imgstdinv = 1 / np.float64(std.reshape(1, -1))
     arr = cv2.multiply(cv2.subtract(img, imgmean), imgstdinv)
     return arr
 
 
-def run_np():
+def run_opencv():
     # 1. load
     img = cv2.imread(jpg_file)
     # 2. resize
@@ -51,7 +56,29 @@ def run_np():
     # 4. flip
     img = np.flip(img, axis=1)
     # 5. normalize
+    img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
     img = _normalize(img)
     # 6. transpose
     img = img.transpose(2, 0, 1)
     return img
+
+
+def run_pil():
+    # 1. load
+    im = Image.open(jpg_file)
+    # 2. resize
+    shape = (im.height, im.width)
+    newsize = _scale_size(shape, scale)
+    im = im.resize(newsize, Image.BILINEAR)
+    # 3. crop
+    shape = (im.height, im.width)
+    box = _crop_box(shape)
+    im = im.crop(box)
+    # 4. flip
+    im = im.transpose(Image.FLIP_LEFT_RIGHT)
+    # 5. normalize
+    i = np.asarray(im)
+    i = _normalize(i)
+    # 6. transpose
+    i = i.transpose(2, 0, 1)
+    return i
