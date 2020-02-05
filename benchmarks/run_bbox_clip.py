@@ -19,16 +19,16 @@ def check(box):
 
 def run_fast():
     cmin = np.empty(bboxes.shape[-1], dtype=bboxes.dtype)
-    cmin[..., 0::2] = img_shape[1] - 1
-    cmin[..., 1::2] = img_shape[0] - 1
+    cmin[0::2] = img_shape[1] - 1
+    cmin[1::2] = img_shape[0] - 1
     clipped_bboxes = np.maximum(np.minimum(bboxes, cmin), 0)
     check(clipped_bboxes)
 
 
 def run_clip():
     cmin = np.empty(bboxes.shape[-1], dtype=bboxes.dtype)
-    cmin[..., 0::2] = img_shape[1] - 1
-    cmin[..., 1::2] = img_shape[0] - 1
+    cmin[0::2] = img_shape[1] - 1
+    cmin[1::2] = img_shape[0] - 1
     clipped_bboxes = np.clip(bboxes, 0, cmin)
     check(clipped_bboxes)
 

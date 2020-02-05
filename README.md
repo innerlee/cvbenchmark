@@ -42,9 +42,9 @@ Who is fast, and who is the fastest.
 
 ```bash
 ./mmbench bbox_clip
-# bbox_clip clip  20000 loops, best of 5: 10.1 usec per loop
-# bbox_clip fast  50000 loops, best of 5: 9.15 usec per loop
-# bbox_clip slow  20000 loops, best of 5: 11.6 usec per loop
+bbox_clip clip  50000 loops, best of 5: 9.81 usec per loop
+bbox_clip fast  50000 loops, best of 5: 8.45 usec per loop
+bbox_clip slow  20000 loops, best of 5: 11 usec per loop
 ```
 
 
