@@ -22,16 +22,14 @@ def run_np():
 
 
 def run_cv2_div():
-    global mean, std
-    mean = np.float64(mean.reshape(1, -1))
-    std = np.float64(std.reshape(1, -1))
-    arr = cv2.divide(cv2.subtract(img, mean), std)
+    imgmean = np.float64(mean.reshape(1, -1))
+    imgstd = np.float64(std.reshape(1, -1))
+    arr = cv2.divide(cv2.subtract(img, imgmean), imgstd)
     return arr
 
 
 def run_cv2_mult():
-    global mean, std
-    mean = np.float64(mean.reshape(1, -1))
-    stdinv = 1 / np.float64(std.reshape(1, -1))
-    arr = cv2.multiply(cv2.subtract(img, mean), stdinv)
+    imgmean = np.float64(mean.reshape(1, -1))
+    imgstdinv = 1 / np.float64(std.reshape(1, -1))
+    arr = cv2.multiply(cv2.subtract(img, imgmean), imgstdinv)
     return arr
