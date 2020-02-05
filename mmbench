@@ -1,0 +1,37 @@
+#!/usr/bin/env python
+import argparse
+import ast
+import subprocess
+
+parser = argparse.ArgumentParser(description='Process some integers.')
+parser.add_argument('group', type=str, help='which benchmark to run')
+parser.add_argument('-b', '--bench', type=str, default='', help='Which specific benchmark to run')
+parser.add_argument('-n', type=str, default='auto', help='Run how many times (default: auto)')
+args = parser.parse_args()
+
+GROUP = args.group
+BENCH = args.bench
+N = [] if args.n == 'auto' else ['-n', args.n]
+
+# discover benchmarks
+if BENCH != '':
+    benches = [BENCH]
+else:
+    benches = sorted(
+        list(
+            map(
+                lambda x: x[4:],
+                filter(
+                    lambda x: x.startswith("run"),
+                    ast.literal_eval(
+                        subprocess.run(["python", "-c", f"from benchmarks import run_{GROUP}; print(dir(run_{GROUP}))"],
+                                       capture_output=True,
+                                       check=True).stdout.decode("utf-8"))))))
+
+WIDTH = max(map(lambda x: len(x), benches))
+for b in benches:
+    t = subprocess.run(
+        ['python', '-m', 'timeit', *N, '-s', f'from benchmarks import run_{GROUP}', f'run_{GROUP}.run_{b}()'],
+        capture_output=True,
+        check=True).stdout.decode("utf-8").strip()
+    print(GROUP, b, ' ' * (WIDTH - len(b)), t)

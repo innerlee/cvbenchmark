@@ -7,53 +7,44 @@ Who is fast, and who is the fastest.
 - Read a `.jpeg` image as an numpy array.
 
 ```bash
-# opencv
-python -m timeit "import cvbenchmark as cb; cb.jpg2np_opencv_run()"
-# 200 loops, best of 5: 1.48 msec per loop
-
-# PyTurboJPEG (libjpeg-turbo), https://pypi.org/project/PyTurboJPEG/
-python -m timeit "import cvbenchmark as cb; cb.jpg2np_turbojpeg_run()"
-# 500 loops, best of 5: 631 usec per loop
+./mmbench jpg2np
+# jpg2np opencv     200 loops, best of 5: 1.54 msec per loop
+# jpg2np turbojpeg  500 loops, best of 5: 663 usec per loop
 ```
 
 - Image array normalization
 
 ```bash
-# (img - mean) / std
-python -m timeit "import cvbenchmark as cb; cb.img_array_normalize_np_run()"
-# 100 loops, best of 5: 2.17 msec per loop
-
-# cv2.divide(cv2.subtract(img, mean), std)
-python -m timeit "import cvbenchmark as cb; cb.img_array_normalize_cv2_div_run()"
-# 200 loops, best of 5: 1.21 msec per loop
-
-# cv2.multiply(cv2.subtract(img, mean), stdinv)
-python -m timeit "import cvbenchmark as cb; cb.img_array_normalize_cv2_mult_run()"
-# 200 loops, best of 5: 1.08 msec per loop
+./mmbench img_array_normalize
+# img_array_normalize cv2_div   200 loops, best of 5: 1.31 msec per loop
+# img_array_normalize cv2_mult  200 loops, best of 5: 1.19 msec per loop
+# img_array_normalize np        100 loops, best of 5: 2.15 msec per loop
 ```
 
 - Convert numpy array from `unit8` to `float32`
 
 ```bash
-# np.float32(img)
-python -m timeit "import cvbenchmark as cb; cb.np_unit8_to_float32_constructor_run()"
-# 5000 loops, best of 5: 67.1 usec per loop
-
-# img.astype(np.float32)
-python -m timeit "import cvbenchmark as cb; cb.np_unit8_to_float32_astype_run()"
-# 5000 loops, best of 5: 68.5 usec per loop
+./mmbench np_uint8_to_float32
+# np_uint8_to_float32 astype       5000 loops, best of 5: 68.3 usec per loop
+# np_uint8_to_float32 constructor  5000 loops, best of 5: 68.8 usec per loop
 ```
 
 - Stack a list of np array (non-contiguous) along axis 0.
+**This test is unstable. Not sure why, yet**
 
 ```bash
-# np.array(imgs)
-python -m timeit -n 50 "import cvbenchmark as cb; cb.img_list_stack_constructor_run()"
-# 50 loops, best of 5: 40 msec per loop
+./mmbench -n 10 img_list_stack
+# img_list_stack constructor  10 loops, best of 5: 56.2 msec per loop
+# img_list_stack stack        10 loops, best of 5: 54.8 msec per loop
+```
 
-# np.stack(imgs, axis=0)
-python -m timeit -n 50 "import cvbenchmark as cb; cb.img_list_stack_stack_run()"
-# 50 loops, best of 5: 34.3 msec per loop
+- Clip bbox
+
+```bash
+./mmbench bbox_clip
+# bbox_clip clip  20000 loops, best of 5: 10.1 usec per loop
+# bbox_clip fast  50000 loops, best of 5: 9.15 usec per loop
+# bbox_clip slow  20000 loops, best of 5: 11.6 usec per loop
 ```
 
 
