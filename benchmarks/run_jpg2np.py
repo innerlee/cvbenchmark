@@ -15,10 +15,10 @@ def check(img):
 
 def run_opencv():
     img = cv2.imread(jpg_file)
-    check(img)
+    return img
 
 
 def run_turbojpeg():
     with open(jpg_file, 'rb') as in_file:
         img = jpeg.decode(in_file.read())
-    check(img)
+    return img

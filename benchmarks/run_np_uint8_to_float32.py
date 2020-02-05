@@ -12,9 +12,9 @@ def check(arr):
 
 def run_constructor():
     arr = np.float32(img)
-    check(arr)
+    return arr
 
 
 def run_astype():
     arr = img.astype('float32')
-    check(arr)
+    return arr

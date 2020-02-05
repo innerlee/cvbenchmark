@@ -12,9 +12,9 @@ def check(arr):
 
 def run_constructor():
     arr = np.array(imgs)
-    check(arr)
+    return arr
 
 
 def run_stack():
     arr = np.stack(imgs, axis=0)
-    check(arr)
+    return arr

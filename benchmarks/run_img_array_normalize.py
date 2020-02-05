@@ -17,7 +17,7 @@ def check(arr):
 
 def run_np():
     arr = (img - mean) / std
-    check(arr)
+    return arr
 
 
 def run_cv2_div():
@@ -25,7 +25,7 @@ def run_cv2_div():
     mean = np.float64(mean.reshape(1, -1))
     std = np.float64(std.reshape(1, -1))
     arr = cv2.divide(cv2.subtract(img, mean), std)
-    check(arr)
+    return arr
 
 
 def run_cv2_mult():
@@ -33,4 +33,4 @@ def run_cv2_mult():
     mean = np.float64(mean.reshape(1, -1))
     stdinv = 1 / np.float64(std.reshape(1, -1))
     arr = cv2.multiply(cv2.subtract(img, mean), stdinv)
-    check(arr)
+    return arr
