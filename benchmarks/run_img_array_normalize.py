@@ -13,6 +13,7 @@ def check(arr):
     assert arr.shape == (300, 400, 3)
     assert arr.dtype == np.float32
     assert np.allclose(arr[0, 0], [-2.0494049, -1.9831933, -1.7172985])
+    assert np.allclose(arr, run_np())
 
 
 def run_np():
