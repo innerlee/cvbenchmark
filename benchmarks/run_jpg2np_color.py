@@ -14,7 +14,7 @@ def check(img):
 
 
 def run_opencv():
-    img = cv2.imread(jpg_file)
+    img = cv2.imread(jpg_file, flags=cv2.IMREAD_COLOR)
     return img
 
 

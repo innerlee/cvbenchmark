@@ -13,7 +13,7 @@ GROUP = args.group
 BENCH = args.bench
 N = [] if args.n == 'auto' else ['-n', args.n]
 
-# discover benchmarks
+# discover
 if BENCH != '':
     benches = [BENCH]
 else:
@@ -31,11 +31,12 @@ else:
 WIDTH = max(map(lambda x: len(x), benches))
 for b in benches:
     # check
-    subprocess.run(['python', '-c', f'from benchmarks import run_{GROUP}', f'run_{GROUP}.check(run_{GROUP}.run_{b}())'],
+    subprocess.run(['python', '-c', f'from benchmarks import run_{GROUP}; run_{GROUP}.check(run_{GROUP}.run_{b}())'],
                    check=True)
     # bench
     t = subprocess.run(
         ['python', '-m', 'timeit', *N, '-s', f'from benchmarks import run_{GROUP}', f'run_{GROUP}.run_{b}()'],
         capture_output=True,
         check=True).stdout.decode('utf-8').strip()
+    # display
     print(GROUP, b, ' ' * (WIDTH - len(b)), t)

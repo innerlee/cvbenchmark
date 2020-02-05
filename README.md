@@ -4,14 +4,21 @@ Who is fast, and who is the fastest.
 
 ## Results
 
-- Read a `.jpeg` image as an numpy array.
+- Read a `.jpeg` color image as an numpy array.
 
 ```bash
-./mmbench jpg2np
+./mmbench jpg2np_color
 # jpg2np opencv     200 loops, best of 5: 1.51 msec per loop
 # jpg2np turbojpeg  500 loops, best of 5: 624 usec per loop
 ```
 
+- Read a `.jpeg` gray scale image as an numpy array.
+
+```bash
+./mmbench jpg2np_gray
+# jpg2np_gray opencv     500 loops, best of 5: 658 usec per loop
+# jpg2np_gray turbojpeg  500 loops, best of 5: 451 usec per loop
+```
 - Image array normalization
 
 ```bash
