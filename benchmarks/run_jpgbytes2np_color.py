@@ -12,7 +12,9 @@ with open(jpg_file, 'rb') as in_file:
 def check(img):
     assert isinstance(img, np.ndarray)
     assert img.shape == (300, 400, 3)
-    assert all(img[0, 0] == [4, 3, 5])
+    assert img.dtype == np.uint8
+    assert (img[0, 0] == [4, 3, 5]).all()
+    assert (img == run_opencv()).all()
 
 
 def run_opencv():

@@ -10,7 +10,9 @@ jpeg = TurboJPEG()
 def check(img):
     assert isinstance(img, np.ndarray)
     assert img.shape == (300, 400)
-    assert all(img[0, :3] == [4, 3, 2])
+    assert img.dtype == np.uint8
+    assert (img[0, :3] == [4, 3, 2]).all()
+    assert (img == run_opencv()).all()
 
 
 def run_opencv():
