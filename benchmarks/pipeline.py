@@ -1,6 +1,5 @@
 import cv2
 import numpy as np
-from benchmarks.consts import jpg_file
 from PIL import Image
 from turbojpeg import TurboJPEG
 
@@ -8,18 +7,10 @@ jpeg = TurboJPEG()
 
 mean = np.float32(np.array([123.675, 116.28, 103.53]))
 std = np.float32(np.array([58.395, 57.12, 57.375]))
-scale = np.float32(np.sqrt(2))
-scale_small = 1 / scale
 target_size = (224, 224)
 
 
-def check(img):
-    assert img.shape == (3, 224, 224)
-    assert img.dtype == np.float32
-    assert np.abs(img - run_opencv()).mean() < 0.025
-
-
-def _load_big():
+def _load_big(jpg_file):
     with open(jpg_file, 'rb') as in_file:
         img = jpeg.decode(in_file.read())
     return img
@@ -59,7 +50,7 @@ def _normalize_slow(img):
     return arr
 
 
-def run_opencv():
+def opencv(jpg_file, scale):
     # 1. load
     img = cv2.imread(jpg_file)
     # 2. resize
@@ -78,9 +69,9 @@ def run_opencv():
     return img
 
 
-def run_opencv_fast():
+def opencv_fast(jpg_file, scale):
     # 1. load
-    img = _load_big()
+    img = _load_big(jpg_file)
     # 2. resize
     newsize = _scale_size(img.shape, scale)
     img = cv2.resize(img, newsize, interpolation=cv2.INTER_LINEAR)
@@ -97,7 +88,7 @@ def run_opencv_fast():
     return img
 
 
-def run_pil():
+def pil(jpg_file, scale):
     # 1. load
     im = Image.open(jpg_file)
     # 2. resize
@@ -116,7 +107,7 @@ def run_pil():
     return i
 
 
-def run_pil_fast():
+def pil_fast(jpg_file, scale):
     # 1. load
     im = Image.open(jpg_file)
     newsize = _scale_size((im.height, im.width), scale)
