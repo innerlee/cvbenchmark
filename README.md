@@ -74,9 +74,17 @@ Who is fast, and who is the fastest.
 - Pipeline: load -> resize -> crop -> flip -> normalize -> transpose
 
 ```bash
-./mmbench -n 200 pipeline
+# 400x300 -> 225x225
+./mmbench -n 200 pipeline_color
 # pipeline opencv       200 loops, best of 5: 4.67 msec per loop
 # pipeline opencv_fast  200 loops, best of 5: 2.94 msec per loop
 # pipeline pil          200 loops, best of 5: 2.44 msec per loop
 # pipeline pil_fast     200 loops, best of 5: 1.91 msec per loop
+
+# 133x100 -> 225x225
+./mmbench -n 200 pipeline_color_small
+# pipeline_color_small opencv       200 loops, best of 5: 1.9 msec per loop
+# pipeline_color_small opencv_fast  200 loops, best of 5: 1.37 msec per loop
+# pipeline_color_small pil          200 loops, best of 5: 1.2 msec per loop
+# pipeline_color_small pil_fast     200 loops, best of 5: 1.16 msec per loop
 ```
