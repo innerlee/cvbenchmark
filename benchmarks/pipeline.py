@@ -114,6 +114,32 @@ def opencv_fast(jpg_file, scale, is_gray=False):
     return img
 
 
+def opencv_fastest(jpg_file, scale, is_gray=False):
+    # 1. load
+    img = _load_fast(jpg_file, is_gray=is_gray)
+    # 3. crop
+    newsize = _scale_size(img.shape, scale)
+    box = _crop_box((newsize[1], newsize[0]))
+    x1, y1, x2, y2 = _scale_box(box, 1 / scale)
+    img = img[y1:y2, x1:x2, ...]
+    # 2. resize
+    img = cv2.resize(img, target_size, interpolation=cv2.INTER_LINEAR)
+    # 4. flip
+    img = np.flip(img, axis=1)
+    # 5. normalize
+    if not is_gray:
+        img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+        img = _normalize(img)
+    else:
+        img = _normalize_gray(img)
+    # 6. transpose
+    if not is_gray:
+        img = img.transpose(2, 0, 1)
+    else:
+        img = img[None, :, :]
+    return img
+
+
 def pil(jpg_file, scale, is_gray=False):
     # 1. load
     im = Image.open(jpg_file)

@@ -1,7 +1,7 @@
 import numpy as np
 
 from .consts import jpg_file
-from .pipeline import opencv, opencv_fast, pil, pil_fast
+from .pipeline import opencv, opencv_fast, opencv_fastest, pil, pil_fast
 
 scale = np.float32(np.sqrt(2))
 
@@ -19,6 +19,11 @@ def run_opencv():
 
 def run_opencv_fast():
     img = opencv_fast(jpg_file, scale)
+    return img
+
+
+def run_opencv_fastest():
+    img = opencv_fastest(jpg_file, scale)
     return img
 
 
