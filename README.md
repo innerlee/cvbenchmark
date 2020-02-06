@@ -74,46 +74,52 @@ Who is fast, and who is the fastest.
 - Pipeline: load -> resize -> crop -> flip -> normalize -> transpose
 
 ```bash
-# color 400x300 -> x1.41 -> 225x225
+# color 400x300 -> x1.41 -> 224x224
 ./mmbench -n 200 pipeline_color
-# pipeline opencv       200 loops, best of 5: 4.67 msec per loop
-# pipeline opencv_fast  200 loops, best of 5: 2.94 msec per loop
-# pipeline pil          200 loops, best of 5: 2.44 msec per loop
-# pipeline pil_fast     200 loops, best of 5: 1.91 msec per loop
+# pipeline_color opencv          200 loops, best of 5: 5.16 msec per loop
+# pipeline_color opencv_fast     200 loops, best of 5: 2.91 msec per loop
+# pipeline_color opencv_fastest  200 loops, best of 5: 1.97 msec per loop
+# pipeline_color pil             200 loops, best of 5: 2.66 msec per loop
+# pipeline_color pil_fast        200 loops, best of 5: 1.83 msec per loop
 
-# gray 400x300 -> x1.41 -> 225x225
+# gray 400x300 -> x1.41 -> 224x224
 ./mmbench -n 200 pipeline_gray
-# pipeline_gray opencv       200 loops, best of 5: 1.51 msec per loop
-# pipeline_gray opencv_fast  200 loops, best of 5: 1.3 msec per loop
-# pipeline_gray pil          100 loops, best of 5: 2.4 msec per loop
-# pipeline_gray pil_fast     200 loops, best of 5: 1.19 msec per loop
+# pipeline_gray opencv          200 loops, best of 5: 1.63 msec per loop
+# pipeline_gray opencv_fast     200 loops, best of 5: 1.33 msec per loop
+# pipeline_gray opencv_fastest  200 loops, best of 5: 865 usec per loop
+# pipeline_gray pil             200 loops, best of 5: 2.31 msec per loop
+# pipeline_gray pil_fast        200 loops, best of 5: 1.19 msec per loop
 
-# color 400x300 -> x0.80 -> 225x225
+# color 400x300 -> x0.80 -> 224x224
 ./mmbench -n 200 pipeline_color_shrink
-# pipeline_color_shrink opencv       100 loops, best of 5: 3.27 msec per loop
-# pipeline_color_shrink opencv_fast  100 loops, best of 5: 2.12 msec per loop
-# pipeline_color_shrink pil          200 loops, best of 5: 1.94 msec per loop
-# pipeline_color_shrink pil_fast     200 loops, best of 5: 1.88 msec per loop
+# pipeline_color_shrink opencv          200 loops, best of 5: 3.29 msec per loop
+# pipeline_color_shrink opencv_fast     200 loops, best of 5: 2.03 msec per loop
+# pipeline_color_shrink opencv_fastest  200 loops, best of 5: 1.99 msec per loop
+# pipeline_color_shrink pil             200 loops, best of 5: 1.82 msec per loop
+# pipeline_color_shrink pil_fast        200 loops, best of 5: 1.87 msec per loop
 
-# gray 400x300 -> x0.80 -> 225x225
+# gray 400x300 -> x0.80 -> 224x224
 ./mmbench -n 200 pipeline_gray_shrink
-# pipeline_gray_shrink opencv       200 loops, best of 5: 1.58 msec per loop
-# pipeline_gray_shrink opencv_fast  200 loops, best of 5: 1.26 msec per loop
-# pipeline_gray_shrink pil          100 loops, best of 5: 2.26 msec per loop
-# pipeline_gray_shrink pil_fast     200 loops, best of 5: 1.18 msec per loop
+# pipeline_gray_shrink opencv          200 loops, best of 5: 1.59 msec per loop
+# pipeline_gray_shrink opencv_fast     200 loops, best of 5: 1.28 msec per loop
+# pipeline_gray_shrink opencv_fastest  200 loops, best of 5: 898 usec per loop
+# pipeline_gray_shrink pil             200 loops, best of 5: 2.3 msec per loop
+# pipeline_gray_shrink pil_fast        200 loops, best of 5: 1.22 msec per loop
 
-# color 133x100 -> x2.56 -> 225x225
+# color 133x100 -> x2.56 -> 224x224
 ./mmbench -n 200 pipeline_color_small
-# pipeline_color_small opencv       200 loops, best of 5: 1.9 msec per loop
-# pipeline_color_small opencv_fast  200 loops, best of 5: 1.37 msec per loop
-# pipeline_color_small pil          200 loops, best of 5: 1.2 msec per loop
-# pipeline_color_small pil_fast     200 loops, best of 5: 1.16 msec per loop
+# pipeline_color_small opencv          200 loops, best of 5: 1.99 msec per loop
+# pipeline_color_small opencv_fast     200 loops, best of 5: 1.39 msec per loop
+# pipeline_color_small opencv_fastest  200 loops, best of 5: 1.36 msec per loop
+# pipeline_color_small pil             200 loops, best of 5: 1.23 msec per loop
+# pipeline_color_small pil_fast        200 loops, best of 5: 1.19 msec per loop
 
 
-# gray 133x100 -> x2.56 -> 225x225
-./mmbench -n 200 pipeline_color_small
-# pipeline_gray_small opencv       500 loops, best of 5: 462 usec per loop
-# pipeline_gray_small opencv_fast  500 loops, best of 5: 457 usec per loop
-# pipeline_gray_small pil          500 loops, best of 5: 926 usec per loop
-# pipeline_gray_small pil_fast     500 loops, best of 5: 720 usec per loop
+# gray 133x100 -> x2.56 -> 224x224
+./mmbench -n 200 pipeline_gray_small
+# pipeline_gray_small opencv          200 loops, best of 5: 445 usec per loop
+# pipeline_gray_small opencv_fast     200 loops, best of 5: 434 usec per loop
+# pipeline_gray_small opencv_fastest  200 loops, best of 5: 428 usec per loop
+# pipeline_gray_small pil             200 loops, best of 5: 942 usec per loop
+# pipeline_gray_small pil_fast        200 loops, best of 5: 727 usec per loop
 ```
