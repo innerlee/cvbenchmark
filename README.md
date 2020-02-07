@@ -57,9 +57,9 @@ Who is fast, and who is the fastest.
 **This test is unstable. Not sure why, yet**
 
 ```bash
-./mmbench -n 10 img_list_stack
-# img_list_stack constructor  10 loops, best of 5: 46.4 msec per loop
-# img_list_stack stack        10 loops, best of 5: 36.6 msec per loop
+./mmbench img_list_stack
+# img_list_stack constructor  100 loops, best of 5: 2.12 msec per loop
+# img_list_stack stack        200 loops, best of 5: 1.96 msec per loop
 ```
 
 - Clip bbox
