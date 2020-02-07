@@ -1,7 +1,7 @@
 import cv2
 import numpy as np
 from PIL import Image
-from turbojpeg import TJPF_GRAY, TurboJPEG
+from turbojpeg import TJCS_RGB, TJPF_BGR, TJPF_GRAY, TurboJPEG
 
 jpeg = TurboJPEG()
 
@@ -9,13 +9,37 @@ mean = np.float32(np.array([123.675, 116.28, 103.53]))
 std = np.float32(np.array([58.395, 57.12, 57.375]))
 target_size = (224, 224)
 
+scaling_factors = [(1, 8), (1, 4), (3, 8), (1, 2), None]
 
-def _load_fast(jpg_file, is_gray):
+
+def _load_fast(jpg_file, is_gray=False, size_hint=None, scale_hint=None, order='bgr', return_scale=False):
+    if is_gray:
+        pixel_format = TJPF_GRAY
+    elif order == 'bgr':
+        pixel_format = TJPF_BGR
+    elif order == 'rgb':
+        pixel_format = TJCS_RGB
+    else:
+        raise ValueError('format not supported')
+
     with open(jpg_file, 'rb') as in_file:
-        if not is_gray:
-            img = jpeg.decode(in_file.read())
+        f = in_file.read()
+        if size_hint is not None:
+            width, height, _, _ = jpeg.decode_header(f)
+            idx = min(4, int(8 * max(size_hint[0] / width, size_hint[1] / height)))
+            scaling_factor = scaling_factors[idx]
+        elif scale_hint is not None:
+            idx = min(4, int(8 * scale_hint))
+            scaling_factor = scaling_factors[idx]
         else:
-            img = jpeg.decode(in_file.read(), pixel_format=TJPF_GRAY)[:, :, 0]
+            scaling_factor = None
+        img = jpeg.decode(f, pixel_format=pixel_format, scaling_factor=scaling_factor)
+
+    if is_gray:
+        img = img[:, :, 0]
+
+    if return_scale:
+        return img, scaling_factor[0] / scaling_factor[1]
     return img
 
 
@@ -116,7 +140,8 @@ def opencv_fast(jpg_file, scale, is_gray=False):
 
 def opencv_fastest(jpg_file, scale, is_gray=False):
     # 1. load
-    img = _load_fast(jpg_file, is_gray=is_gray)
+    img, s = _load_fast(jpg_file, is_gray=is_gray, order='rgb', scale_hint=scale, return_scale=True)
+    scale = scale / s
     # 3. crop
     newsize = _scale_size(img.shape, scale)
     box = _crop_box((newsize[1], newsize[0]))
@@ -128,7 +153,6 @@ def opencv_fastest(jpg_file, scale, is_gray=False):
     img = np.flip(img, axis=1)
     # 5. normalize
     if not is_gray:
-        img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
         img = _normalize(img)
     else:
         img = _normalize_gray(img)

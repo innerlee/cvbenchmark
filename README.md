@@ -76,27 +76,35 @@ Who is fast, and who is the fastest.
 ```bash
 # color 400x300 -> x1.41 -> 224x224
 ./mmbench -n 200 pipeline_color
-# pipeline_color opencv          200 loops, best of 5: 5.16 msec per loop
-# pipeline_color opencv_fast     200 loops, best of 5: 2.91 msec per loop
-# pipeline_color opencv_fastest  200 loops, best of 5: 1.97 msec per loop
-# pipeline_color pil             200 loops, best of 5: 2.66 msec per loop
-# pipeline_color pil_fast        200 loops, best of 5: 1.83 msec per loop
+# pipeline_color opencv          200 loops, best of 5: 4.85 msec per loop
+# pipeline_color opencv_fast     200 loops, best of 5: 2.81 msec per loop
+# pipeline_color opencv_fastest  200 loops, best of 5: 1.8 msec per loop
+# pipeline_color pil             200 loops, best of 5: 2.6 msec per loop
+# pipeline_color pil_fast        200 loops, best of 5: 1.85 msec per loop
 
 # color 400x300 -> x0.80 -> 224x224
 ./mmbench -n 200 pipeline_color_shrink
-# pipeline_color_shrink opencv          200 loops, best of 5: 3.29 msec per loop
-# pipeline_color_shrink opencv_fast     200 loops, best of 5: 2.03 msec per loop
-# pipeline_color_shrink opencv_fastest  200 loops, best of 5: 1.99 msec per loop
-# pipeline_color_shrink pil             200 loops, best of 5: 1.82 msec per loop
-# pipeline_color_shrink pil_fast        200 loops, best of 5: 1.87 msec per loop
+# pipeline_color_shrink opencv          200 loops, best of 5: 3.26 msec per loop
+# pipeline_color_shrink opencv_fast     200 loops, best of 5: 2.13 msec per loop
+# pipeline_color_shrink opencv_fastest  200 loops, best of 5: 1.89 msec per loop
+# pipeline_color_shrink pil             200 loops, best of 5: 1.81 msec per loop
+# pipeline_color_shrink pil_fast        200 loops, best of 5: 1.86 msec per loop
+
+# color 800x600 -> x0.426 -> 224x224
+./mmbench -n 200 pipeline_color_shrink_big
+# pipeline_color_shrink_big opencv          200 loops, best of 5: 7.22 msec per loop
+# pipeline_color_shrink_big opencv_fast     200 loops, best of 5: 3.1 msec per loop
+# pipeline_color_shrink_big opencv_fastest  200 loops, best of 5: 2.65 msec per loop
+# pipeline_color_shrink_big pil             200 loops, best of 5: 2.7 msec per loop
+# pipeline_color_shrink_big pil_fast        200 loops, best of 5: 2.87 msec per loop
 
 # color 133x100 -> x2.56 -> 224x224
 ./mmbench -n 200 pipeline_color_small
-# pipeline_color_small opencv          200 loops, best of 5: 1.99 msec per loop
-# pipeline_color_small opencv_fast     200 loops, best of 5: 1.39 msec per loop
-# pipeline_color_small opencv_fastest  200 loops, best of 5: 1.36 msec per loop
+# pipeline_color_small opencv          200 loops, best of 5: 1.91 msec per loop
+# pipeline_color_small opencv_fast     200 loops, best of 5: 1.4 msec per loop
+# pipeline_color_small opencv_fastest  200 loops, best of 5: 1.14 msec per loop
 # pipeline_color_small pil             200 loops, best of 5: 1.23 msec per loop
-# pipeline_color_small pil_fast        200 loops, best of 5: 1.19 msec per loop
+# pipeline_color_small pil_fast        200 loops, best of 5: 1.18 msec per loop
 
 
 # gray 400x300 -> x1.41 -> 224x224
@@ -124,23 +132,23 @@ Who is fast, and who is the fastest.
 # pipeline_gray_small pil_fast        200 loops, best of 5: 727 usec per loop
 
 ./mmbench -n 10 pipeline_color_batch
-# pipeline_color_batch opencv          10 loops, best of 5: 270 msec per loop
-# pipeline_color_batch opencv_fast     10 loops, best of 5: 146 msec per loop
-# pipeline_color_batch opencv_fastest  10 loops, best of 5: 93.1 msec per loop
-# pipeline_color_batch pil             10 loops, best of 5: 99.3 msec per loop
-# pipeline_color_batch pil_fast        10 loops, best of 5: 96.5 msec per loop
+# pipeline_color_batch opencv          10 loops, best of 5: 265 msec per loop
+# pipeline_color_batch opencv_fast     10 loops, best of 5: 145 msec per loop
+# pipeline_color_batch opencv_fastest  10 loops, best of 5: 88.4 msec per loop
+# pipeline_color_batch pil             10 loops, best of 5: 99.8 msec per loop
+# pipeline_color_batch pil_fast        10 loops, best of 5: 96 msec per loop
 
 ./mmbench -n 10 pipeline_color_shrink_batch
 # pipeline_color_shrink_batch opencv          10 loops, best of 5: 187 msec per loop
-# pipeline_color_shrink_batch opencv_fast     10 loops, best of 5: 112 msec per loop
-# pipeline_color_shrink_batch opencv_fastest  10 loops, best of 5: 114 msec per loop
+# pipeline_color_shrink_batch opencv_fast     10 loops, best of 5: 119 msec per loop
+# pipeline_color_shrink_batch opencv_fastest  10 loops, best of 5: 100 msec per loop
 # pipeline_color_shrink_batch pil             10 loops, best of 5: 90.7 msec per loop
-# pipeline_color_shrink_batch pil_fast        10 loops, best of 5: 93.4 msec per loop
+# pipeline_color_shrink_batch pil_fast        10 loops, best of 5: 101 msec per loop
 
 ./mmbench -n 10 pipeline_color_small_batch
-# pipeline_color_small_batch opencv          10 loops, best of 5: 104 msec per loop
-# pipeline_color_small_batch opencv_fast     10 loops, best of 5: 64.5 msec per loop
-# pipeline_color_small_batch opencv_fastest  10 loops, best of 5: 61.6 msec per loop
-# pipeline_color_small_batch pil             10 loops, best of 5: 53.2 msec per loop
-# pipeline_color_small_batch pil_fast        10 loops, best of 5: 50.9 msec per loop
+# pipeline_color_small_batch opencv          10 loops, best of 5: 103 msec per loop
+# pipeline_color_small_batch opencv_fast     10 loops, best of 5: 67.1 msec per loop
+# pipeline_color_small_batch opencv_fastest  10 loops, best of 5: 46.2 msec per loop
+# pipeline_color_small_batch pil             10 loops, best of 5: 52.4 msec per loop
+# pipeline_color_small_batch pil_fast        10 loops, best of 5: 49.7 msec per loop
 ```
