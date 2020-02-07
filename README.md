@@ -151,4 +151,8 @@ Who is fast, and who is the fastest.
 # pipeline_color_small_batch opencv_fastest  10 loops, best of 5: 46.2 msec per loop
 # pipeline_color_small_batch pil             10 loops, best of 5: 52.4 msec per loop
 # pipeline_color_small_batch pil_fast        10 loops, best of 5: 49.7 msec per loop
+
+./mmbench -n 100 img_array_normalize_at
+# img_array_normalize_at cpu  100 loops, best of 5: 3.35 msec per loop
+# img_array_normalize_at gpu  100 loops, best of 5: 689 usec per loop
 ```
