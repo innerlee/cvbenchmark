@@ -39,4 +39,4 @@ for b in benches:
         capture_output=True,
         check=True).stdout.decode('utf-8').strip()
     # display
-    print(GROUP, b, ' ' * (WIDTH - len(b)), t)
+    print('#', GROUP, b, ' ' * (WIDTH - len(b)), t)
