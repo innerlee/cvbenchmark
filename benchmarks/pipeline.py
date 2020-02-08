@@ -152,18 +152,17 @@ def opencv_fastest(jpg_file, scale, is_gray=False):
     img = cv2.resize(img, target_size, interpolation=cv2.INTER_LINEAR)
     # 4. flip
     img = np.flip(img, axis=1)
-    return None
     # 5. normalize
-    # if not is_gray:
-    #     img = _normalize(img)
-    # else:
-    #     img = _normalize_gray(img)
-    # # 6. transpose
-    # if not is_gray:
-    #     img = img.transpose(2, 0, 1)
-    # else:
-    #     img = img[None, :, :]
-    # return img
+    if not is_gray:
+        img = _normalize(img)
+    else:
+        img = _normalize_gray(img)
+    # 6. transpose
+    if not is_gray:
+        img = img.transpose(2, 0, 1)
+    else:
+        img = img[None, :, :]
+    return img
 
 
 def pil(jpg_file, scale, is_gray=False):
