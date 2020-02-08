@@ -74,6 +74,9 @@ Who is fast, and who is the fastest.
 - Pipeline: load -> resize -> crop -> flip -> normalize -> transpose
 
 ```bash
+
+## color
+
 # color 400x300 -> x1.41 -> 224x224
 ./mmbench -n 200 pipeline_color
 # pipeline_color opencv          200 loops, best of 5: 4.85 msec per loop
@@ -107,6 +110,8 @@ Who is fast, and who is the fastest.
 # pipeline_color_small pil_fast        200 loops, best of 5: 1.18 msec per loop
 
 
+## gray
+
 # gray 400x300 -> x1.41 -> 224x224
 ./mmbench -n 200 pipeline_gray
 # pipeline_gray opencv          200 loops, best of 5: 1.63 msec per loop
@@ -131,6 +136,9 @@ Who is fast, and who is the fastest.
 # pipeline_gray_small pil             200 loops, best of 5: 942 usec per loop
 # pipeline_gray_small pil_fast        200 loops, best of 5: 727 usec per loop
 
+
+## batch
+
 ./mmbench -n 10 pipeline_color_batch
 # pipeline_color_batch opencv          10 loops, best of 5: 265 msec per loop
 # pipeline_color_batch opencv_fast     10 loops, best of 5: 145 msec per loop
@@ -152,7 +160,22 @@ Who is fast, and who is the fastest.
 # pipeline_color_small_batch pil             10 loops, best of 5: 52.4 msec per loop
 # pipeline_color_small_batch pil_fast        10 loops, best of 5: 49.7 msec per loop
 
+
+## gpu
+
 ./mmbench -n 100 img_array_normalize_at
 # img_array_normalize_at cpu  100 loops, best of 5: 3.35 msec per loop
 # img_array_normalize_at gpu  100 loops, best of 5: 689 usec per loop
+```
+
+
+## Setup
+
+```bash
+conda uninstall -y --force pillow pil jpeg libtiff libjpeg-turbo
+pip   uninstall -y         pillow pil jpeg libtiff libjpeg-turbo
+conda install -yc conda-forge libjpeg-turbo
+CFLAGS="${CFLAGS} -mavx2" pip install --upgrade --no-cache-dir --force-reinstall --no-binary :all: --compile pillow-simd
+
+pip install -U git+git://github.com/lilohuang/PyTurboJPEG.git
 ```
