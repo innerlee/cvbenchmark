@@ -12,7 +12,6 @@ def check(arr):
     assert isinstance(arr, np.ndarray)
     assert arr.shape == (300, 400, 3)
     assert arr.dtype == np.float32
-    assert np.allclose(arr, [-2.0494049, -1.9831933, -1.7172985])
     assert np.allclose(arr, run_np())
 
 
