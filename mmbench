@@ -2,7 +2,6 @@
 import argparse
 import ast
 import subprocess
-import cmd
 
 parser = argparse.ArgumentParser(description='Process some integers.')
 parser.add_argument('group', type=str, help='which benchmark to run')
