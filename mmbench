@@ -14,7 +14,6 @@ BENCH = args.bench
 N = [] if args.n == 'auto' else ['-n', args.n]
 
 # discover
-
 if GROUP != '':
     if GROUP.startswith('benchmarks/run_'):
         GROUP = GROUP[15:-3]
