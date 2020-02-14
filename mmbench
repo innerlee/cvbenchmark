@@ -4,24 +4,6 @@ import ast
 import subprocess
 import cmd
 
-# class MyCmd(cmd.Cmd):
-#     def do_send(self, line):
-#         pass
-
-#     def complete_send(self, text, line, start_index, end_index):
-#         if text:
-#             return [
-#                 address for address in addresses
-#                 if address.startswith(text)
-#             ]
-#         else:
-#             return addresses
-
-
-# if __name__ == '__main__':
-#     my_cmd = MyCmd()
-#     my_cmd.cmdloop()
-
 parser = argparse.ArgumentParser(description='Process some integers.')
 parser.add_argument('group', type=str, help='which benchmark to run')
 parser.add_argument('-b', '--bench', type=str, default='', help='Which specific benchmark to run')
