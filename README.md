@@ -40,11 +40,12 @@ Who is fast, and who is the fastest.
 
 ```bash
 ./mmbench img_array_normalize
-# img_array_normalize cv2_div    200 loops, best of 5: 1.41 msec per loop
-# img_array_normalize cv2_mult   200 loops, best of 5: 1.34 msec per loop
-# img_array_normalize cv2_mult2  200 loops, best of 5: 1 msec per loop
-# img_array_normalize cv2_mult3  1000 loops, best of 5: 372 usec per loop
-# img_array_normalize np         100 loops, best of 5: 2.03 msec per loop
+# img_array_normalize cv2_div    200 loops, best of 5: 1.81 msec per loop
+# img_array_normalize cv2_mult   200 loops, best of 5: 1.68 msec per loop
+# img_array_normalize cv2_mult2  200 loops, best of 5: 1.33 msec per loop
+# img_array_normalize cv2_mult3  200 loops, best of 5: 1.25 msec per loop
+# img_array_normalize cv2_mult4  500 loops, best of 5: 594 usec per loop
+# img_array_normalize np         100 loops, best of 5: 2.43 msec per loop
 ```
 
 - Convert numpy array from `unit8` to `float32`
