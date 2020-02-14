@@ -32,3 +32,11 @@ def run_cv2_mult():
     imgstdinv = 1 / np.float64(std.reshape(1, -1))
     arr = cv2.multiply(cv2.subtract(img, imgmean), imgstdinv)
     return arr
+
+
+def run_cv2_mult2():
+    imgmean = np.float64(mean.reshape(1, -1))
+    imgstdinv = 1 / np.float64(std.reshape(1, -1))
+    arr = cv2.subtract(img, imgmean)
+    cv2.multiply(arr, imgstdinv, arr)
+    return arr
