@@ -40,9 +40,10 @@ Who is fast, and who is the fastest.
 
 ```bash
 ./mmbench img_array_normalize
-# img_array_normalize cv2_div   200 loops, best of 5: 1.18 msec per loop
-# img_array_normalize cv2_mult  200 loops, best of 5: 1.02 msec per loop
-# img_array_normalize np        100 loops, best of 5: 2.09 msec per loop
+# img_array_normalize cv2_div    200 loops, best of 5: 1.07 msec per loop
+# img_array_normalize cv2_mult   200 loops, best of 5: 985 usec per loop
+# img_array_normalize cv2_mult2  1000 loops, best of 5: 342 usec per loop
+# img_array_normalize np         200 loops, best of 5: 1.67 msec per loop
 ```
 
 - Convert numpy array from `unit8` to `float32`
@@ -164,8 +165,8 @@ Who is fast, and who is the fastest.
 ## gpu
 
 ./mmbench -n 100 img_array_normalize_at
-# img_array_normalize_at cpu  100 loops, best of 5: 3.35 msec per loop
-# img_array_normalize_at gpu  100 loops, best of 5: 689 usec per loop
+# img_array_normalize_at cpu  100 loops, best of 5: 2.57 msec per loop
+# img_array_normalize_at gpu  100 loops, best of 5: 486 usec per loop
 ```
 
 

@@ -19,7 +19,8 @@ def _cv2_normalize(img):
     img = np.float32(img)
     imgmean = np.float64(mean.reshape(1, -1))
     imgstdinv = 1 / np.float64(std.reshape(1, -1))
-    arr = cv2.multiply(cv2.subtract(img, imgmean), imgstdinv)
+    arr = cv2.subtract(img, imgmean)
+    cv2.multiply(arr, imgstdinv, arr)
     return arr
 
 
