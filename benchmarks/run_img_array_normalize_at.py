@@ -4,6 +4,8 @@ import torch
 
 from .consts import jpg_file_224
 
+torch.ones(1).to('cuda:0')
+
 imgs = [cv2.imread(jpg_file_224) for _ in range(8)]
 mean = np.float32(np.array([123.675, 116.28, 103.53]))
 std = np.float32(np.array([58.395, 57.12, 57.375]))

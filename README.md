@@ -74,6 +74,14 @@ Who is fast, and who is the fastest.
 # bbox_clip slow  50000 loops, best of 5: 5.71 usec per loop
 ```
 
+- Permute channel dim before spatial at cpu or gpu.
+
+```bash
+$ ./mmbench -n 500 benchmarks/run_permute_at.py
+# permute_at cpu  500 loops, best of 5: 1.22 msec per loop
+# permute_at gpu  500 loops, best of 5: 478 usec per loop
+```
+
 - Pipeline: load -> resize -> crop -> flip -> normalize -> transpose
 
 ```bash
