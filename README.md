@@ -77,9 +77,17 @@ Who is fast, and who is the fastest.
 - Permute channel dim before spatial at cpu or gpu.
 
 ```bash
-$ ./mmbench -n 500 benchmarks/run_permute_at.py
+./mmbench -n 500 benchmarks/run_permute_at.py
 # permute_at cpu  500 loops, best of 5: 1.22 msec per loop
 # permute_at gpu  500 loops, best of 5: 478 usec per loop
+```
+
+- Flip image array using np or cv2.
+
+```bash
+./mmbench benchmarks/run_flip.py
+# flip cv2  500 loops, best of 5: 915 usec per loop
+# flip np   50 loops, best of 5: 7.66 msec per loop
 ```
 
 - Pipeline: load -> resize -> crop -> flip -> normalize -> transpose
