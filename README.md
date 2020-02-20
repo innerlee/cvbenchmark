@@ -7,6 +7,10 @@ Who is fast, and who is the fastest.
 - Read a `.jpeg` color image as an numpy array.
 
 ```bash
+./mmbench benchmarks/run_resize.py
+# resize cv2  50 loops, best of 5: 5.13 msec per loop
+# resize np   20 loops, best of 5: 9.05 msec per loop
+
 ./mmbench jpg2np_color
 # jpg2np opencv     200 loops, best of 5: 1.51 msec per loop
 # jpg2np turbojpeg  500 loops, best of 5: 624 usec per loop
