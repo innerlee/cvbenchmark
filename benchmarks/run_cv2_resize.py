@@ -1,5 +1,4 @@
 import cv2
-import numpy as np
 
 from .consts import jpg_file_big
 
