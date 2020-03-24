@@ -20,7 +20,6 @@ def run_turbojpeg():
 
 
 def run_PIL():
-    img = Image.open(jpg_file)
-    img = img.crop((20, 40, 220, 240))
+    img = Image.open(jpg_file).crop((20, 40, 220, 240))
 
     return np.array(img)
