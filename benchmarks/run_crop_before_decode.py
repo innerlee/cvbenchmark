@@ -1,6 +1,6 @@
+import cv2
 from turbojpeg import TurboJPEG, TJPF_GRAY, TJSAMP_GRAY, TJFLAG_PROGRESSIVE
 import os
-os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 import tensorflow as tf
 
@@ -27,4 +27,5 @@ def run_partial():
 
 def run_tf():
     img = tf.io.decode_and_crop_jpeg(tf.convert_to_tensor(data), (16, 16, 224, 224)).numpy()
+    cv2.cvtColor(img, cv2.COLOR_BGR2RGB, img)
     return img
