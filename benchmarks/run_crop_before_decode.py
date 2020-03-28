@@ -13,6 +13,7 @@ in_file.close()
 
 def check(img):
     img == (224, 224, 3)
+    print(img[44, 44])
 
 
 def run_full():
@@ -26,6 +27,10 @@ def run_partial():
 
 
 def run_tf():
+    img = tf.reverse(tf.io.decode_and_crop_jpeg(tf.convert_to_tensor(data), (16, 16, 224, 224)), [-1]).numpy()
+    return img
+
+
+def run_tf_noreverse():
     img = tf.io.decode_and_crop_jpeg(tf.convert_to_tensor(data), (16, 16, 224, 224)).numpy()
-    cv2.cvtColor(img, cv2.COLOR_BGR2RGB, img)
     return img
