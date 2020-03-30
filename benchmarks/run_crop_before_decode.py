@@ -1,4 +1,5 @@
 import cv2
+import numpy as np
 from turbojpeg import TurboJPEG, TJPF_GRAY, TJSAMP_GRAY, TJFLAG_PROGRESSIVE
 import os
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
@@ -33,4 +34,9 @@ def run_tf():
 
 def run_tf_noreverse():
     img = tf.io.decode_and_crop_jpeg(tf.convert_to_tensor(data), (16, 16, 224, 224)).numpy()
+    return img
+
+
+def run_tf_noreverse_view():
+    img = np.asarray(memoryview(tf.io.decode_and_crop_jpeg(tf.convert_to_tensor(data), (16, 16, 224, 224))))
     return img
