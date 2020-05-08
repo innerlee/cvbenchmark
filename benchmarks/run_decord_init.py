@@ -1,6 +1,6 @@
 import glob
 
-from decord import VideoReader, cpu, gpu
+from decord import VideoReader, cpu
 
 files = glob.glob('k400/*')
 

@@ -1,7 +1,7 @@
 import cv2
 import numpy as np
-from turbojpeg import TurboJPEG, TJCS_RGB
 import tensorflow as tf
+from turbojpeg import TJCS_RGB, TurboJPEG
 
 from .consts import jpg_file
 

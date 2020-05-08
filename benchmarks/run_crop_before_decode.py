@@ -1,11 +1,13 @@
-import cv2
-import numpy as np
-from turbojpeg import TurboJPEG, TJPF_GRAY, TJSAMP_GRAY, TJFLAG_PROGRESSIVE
 import os
-os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
+
+import numpy as np
 import tensorflow as tf
+from turbojpeg import TurboJPEG
 
 from .consts import jpg_file
+
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
+
 jpeg = TurboJPEG()
 in_file = open(jpg_file, 'rb')
 data = in_file.read()

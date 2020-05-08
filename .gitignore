@@ -115,3 +115,7 @@ work_dirs/
 
 # Pytorch
 *.pth
+
+# misc.
+*.mp4
+oprofile_data/
