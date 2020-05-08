@@ -1,0 +1,11 @@
+encode with 32 keyframe interval:
+ffmpeg -i k400/5-047pkcrL0_000001_000011.mp4 -c:v libx264 -g 32 out.mp4 -y
+
+count frames:
+ffmpeg -i k400/5-047pkcrL0_000001_000011.mp4 -map 0:v:0 -c copy -f null - 2>&1 | grep frame
+
+show keyframes:
+ffprobe -loglevel error -select_streams v:0 -show_entries packet=pts_time,flags -of csv=print_section=0 k400/5-047pkcrL0_000001_000011.mp4 | awk -F',' '/K/ {print $1}'
+
+general info:
+ffprobe input.mp4
