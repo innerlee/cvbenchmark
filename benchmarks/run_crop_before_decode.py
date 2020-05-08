@@ -15,7 +15,7 @@ in_file.close()
 
 
 def check(img):
-    img == (224, 224, 3)
+    assert img == (224, 224, 3)
     print(img[44, 44])
 
 
