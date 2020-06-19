@@ -1,5 +1,7 @@
 import cv2
 import numpy as np
+import torch
+from torchvision.transforms import functional as F
 
 from .consts import jpg_file
 
@@ -13,6 +15,15 @@ def check(arr):
     assert arr.shape == (300, 400, 3)
     assert arr.dtype == np.float32
     assert np.allclose(arr, run_np())
+
+
+def run_torch():
+    img = np.float32(image)
+    cv2.cvtColor(img, cv2.COLOR_BGR2RGB, img)
+    img = np.transpose(img, [2, 0, 1])
+    arr = F.normalize(torch.from_numpy(img), mean=torch.from_numpy(mean), std=torch.from_numpy(std))
+    arr = np.transpose(arr, [1, 2, 0]).numpy()
+    return arr
 
 
 def run_np():
